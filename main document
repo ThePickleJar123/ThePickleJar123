@@ -1,139 +1,125 @@
 # PROJECT TECHNICAL FOUNDATION
 
-## Version 1.1 — Locked Technical Decisions & Development Workflow
+## Version 1.2 — Locked Technical Decisions & Development Workflow
 
-This document defines the technical foundation, development philosophy, AI team structure, and human/AI workflow for the game project.
+This document defines the technical foundation, development philosophy, AI team structure, and development workflow for the project.
 
-**Every AI assistant working on this project must read and understand this document before proposing technical changes or writing substantial code.**
+Every AI assistant working on the project should read and understand this document before performing major work.
 
-This document is the project's current technical baseline. If a decision is changed later, the change should be explicitly documented rather than silently replacing an existing decision.
-
----
-
-# 1. PROJECT OWNERSHIP
-
-## Human Project Owner
-
-The human developer is the **project owner and final authority**.
-
-The human's responsibilities are:
-
-* Decide the overall creative direction
-* Define what kind of game they want to make
-* Provide feedback on how the game feels to play
-* Test builds and report observed problems
-* Approve major changes
-* Make final decisions when there is a genuine disagreement
-* Communicate between AI assistants when necessary
-* Maintain the project files and development environment
-
-However, the human project owner explicitly does **NOT** expect the AI assistants to simply agree with their ideas.
-
-The human wants the AI team to prioritize:
-
-**Project quality > technical correctness > long-term maintainability > immediate user satisfaction**
-
-If an idea is likely to damage the project, create excessive technical debt, introduce unnecessary complexity, or create an unrealistic development burden, the AI should say so clearly.
-
-The AI should not agree with an idea merely because the human suggested it.
-
-The human is comfortable receiving direct criticism, including a clear **"No"**, when there is a good technical or project-management reason.
+This document is the current technical baseline. Changes should be explicit and documented rather than silently replacing previous decisions.
 
 ---
 
-# 2. HUMAN / AI RELATIONSHIP
+# 1. Project Ownership
 
-The human is the **project owner**, not the person expected to personally design every technical detail.
+The human is the **Project Owner and Final Authority**.
 
-The AI team is intended to function as a small virtual development team.
+The AI assistants are development collaborators, not independent owners of the project.
 
-The human should not need to understand every implementation detail before development can continue.
+The human determines:
 
-The AI team should:
+* what game the project should become
+* creative direction
+* gameplay priorities
+* what features are desirable
+* final decisions when genuine disagreements remain
+* whether the project remains private or eventually becomes public
+* when development priorities change
 
-* Explain important decisions
-* Identify risks
-* Recommend practical approaches
-* Challenge bad assumptions
-* Prevent unnecessary complexity
-* Keep the project organized
-* Turn broad ideas into implementable tasks
+AI assistants are responsible for providing technical expertise, implementation, criticism, and planning.
 
-The human remains responsible for the final direction and approval.
-
----
-
-# 3. CORE DEVELOPMENT PRINCIPLE
-
-The project should optimize for the **long-term health of the game**, not for satisfying the human's immediate enthusiasm.
-
-Examples:
-
-If the human proposes:
-
-> "Let's add 10,000 star systems right now."
-
-The AI should NOT automatically implement it.
-
-Instead, it should determine whether that is appropriate for the current development stage.
-
-The AI may respond:
-
-> "No. The long-term game can support 10,000 systems, but implementing them now would provide little value and would make development harder. Let's build the simulation so that it can scale toward 10,000 systems, then benchmark it as we expand."
-
-The human explicitly prefers this kind of response.
+The human is comfortable receiving direct criticism, including a clear **"No"**, when an idea would create unnecessary technical debt, scope problems, or architectural problems.
 
 ---
 
-# 4. PROJECT CONCEPT
+# 2. Human / AI Relationship
 
-The game is a large-scale 2D space simulation inspired by games such as:
+The project uses multiple AI assistants with specialized responsibilities.
 
-* X4: Foundations
+The goal is not to make every AI independently design the game.
+
+Instead:
+
+* ChatGPT coordinates architecture and development direction.
+* Gemini primarily implements systems.
+* Claude independently reviews and criticizes work.
+* The human connects the AI team, tests the actual game, and makes final decisions.
+
+AI assistants should not silently override decisions made by the project architecture.
+
+If an AI believes an existing architectural decision should change, it should explicitly explain:
+
+1. what the existing decision is
+2. what problem it creates
+3. why the problem matters
+4. what alternative is being proposed
+5. what trade-offs the alternative introduces
+
+---
+
+# 3. Core Development Principle
+
+The project's primary priority order is:
+
+**Project quality > technical correctness > long-term maintainability > scalability > simplicity > practicality > immediate convenience**
+
+Immediate user satisfaction must never override the long-term health of the project.
+
+The project should grow because its foundation supports growth — not because development was rushed to build impressive features.
+
+Ambition is encouraged.
+
+Recklessness is not.
+
+---
+
+# 4. Project Concept
+
+The project is an ambitious 2D space simulation inspired by games and genres including:
+
+* X4
 * Elite Dangerous
 * Stellaris
 * Terra Invicta
-* Distant Worlds 2
-* Sins of a Solar Empire 2
-* Antimatter
+* Distant Worlds
+* Sins of a Solar Empire
+* other large-scale space simulation and strategy games
 
-The long-term vision is a seamless progression from a small individual operation into increasingly large economic, political, and civilizational activity.
+The long-term concept includes the possibility of progressing from:
 
-The eventual simulation may contain:
+**individual → ship → company → stations → colonies → factions/civilizations**
 
-* Thousands of star systems
-* Tens of thousands of planets and moons
-* Thousands of procedurally generated species
-* Thousands of technologies
-* Procedurally generated civilizations
-* Large-scale economies
-* Populations
-* Production chains
-* Trade
-* Politics
-* Diplomacy
-* Exploration
-* Colonization
-* Factions
-* Procedurally generated history
-* Dynamic events
-* Ships
-* Stations
-* Colonies
-* Research
-* Logistics
+Potential systems include:
 
-These are **long-term goals, not requirements for the first prototype.**
+* space exploration
+* combat
+* mining
+* transportation
+* logistics
+* manufacturing
+* markets
+* economy
+* research
+* diplomacy
+* politics
+* colonization
+* factions
+* procedural civilizations
+* procedural species
+* procedural history
+* large-scale simulation
 
-The project must be developed incrementally.
+These are long-term possibilities, not requirements for the initial prototype.
+
+The project should only implement systems when their foundations are sufficiently mature.
 
 ---
 
-# 5. INITIAL DEVELOPMENT TARGET
+# 5. Initial Development Target
 
-The first prototype should be extremely small.
+Development must begin extremely small.
 
-Initial prototype target:
+The initial prototype should contain approximately:
 
 * 1 star
 * 1 planet
@@ -141,750 +127,788 @@ Initial prototype target:
 * 1 player ship
 * 1 resource
 * 1 market
-* Basic movement
-* Basic mining
-* Basic buying/selling
+* basic movement
+* basic mining
+* basic buying
+* basic selling
 
-The purpose of the first prototype is NOT to demonstrate the entire game.
+The purpose is not to create an impressive first build.
 
-Its purpose is to prove that the fundamental architecture and gameplay loop work.
+The purpose is to validate the architecture.
 
-The development progression should generally follow:
-
-**Small working system**
-→ **larger working system**
-→ **scalable architecture**
-→ **large procedural simulation**
-
-Do not create large amounts of content before the underlying systems work.
+If the smallest version is not technically clean, adding more content will only make the eventual problems harder to fix.
 
 ---
 
-# 6. LOCKED TECHNOLOGY STACK
+# 6. Locked Technology Stack
 
-## Game Engine
+Current technical decisions:
+
+### Engine
 
 **Godot 4.7.2 stable**
 
-Godot 4.7.2 is the current selected stable engine version.
-
-Do not switch to development releases without explicitly discussing the change first.
-
-Reasons for selection:
-
-* Free and open source
-* Excellent 2D support
-* Beginner-friendly
-* Good UI tools
-* Good iteration speed
-* Suitable for the intended game
-* No engine royalties
-
----
-
-## Main Programming Language
+### Main language
 
 **GDScript**
 
-GDScript is the primary programming language.
-
-All gameplay and engine-facing systems should initially be written in GDScript.
-
-Do not introduce C# or another primary game language unless a specific technical requirement justifies it.
-
----
-
-## Secondary Programming Language
+### Secondary language
 
 **Python**
 
-Python is NOT the primary game language.
+Python may be used for:
 
-Python is used for external development tools, experimentation, analysis, and automation.
+* external tools
+* experimentation
+* analysis
+* automation
+* procedural generation
+* balance analysis
+* testing
+* data conversion
+* save/data inspection
+* other development-time utilities
 
-Potential uses:
+Python is not intended to run the core game simulation.
 
-* Procedural data generation
-* Galaxy-generation experiments
-* Economy simulations
-* Balance analysis
-* Automated testing
-* Statistical analysis
-* Data conversion
-* Dataset generation
-* Development utilities
-* Save/data inspection tools
-
-The actual game remains a Godot/GDScript project.
-
----
-
-## Version Control
+### Version control
 
 **Git**
 
-Git is mandatory from the beginning of serious development.
+### Remote backup
 
-Use Git to:
+**GitHub Free private repository**
 
-* Track changes
-* Create restore points
-* Experiment safely
-* Revert broken changes
-* Maintain development branches when useful
-* Record major milestones
+### Code editor
 
-Commit working milestones regularly.
+Initially:
 
----
+**Godot Editor**
 
-## Remote Backup
+VS Code may be introduced later if it provides a clear benefit.
 
-**GitHub Free — private repository**
-
-The project repository should remain private.
-
-GitHub is used primarily for:
-
-* Remote backup
-* Version history
-* Repository management
-* Issue tracking when useful
-* Project organization when useful
-
-The project does not currently intend to be publicly released.
-
----
-
-## Code Editor
-
-**Godot Editor initially**
-
-The Godot editor is the default development environment.
-
-Do not add additional development software unnecessarily at the beginning.
-
-A dedicated external editor such as VS Code may be introduced later if the project becomes large enough to benefit from it.
-
----
-
-## Data Format
+### Data
 
 **JSON initially**
 
-JSON will be used for human-readable game data during early development.
+JSON is preferred during early development because it is human-readable, easy to inspect, and easy to generate.
 
-Potential uses:
+If data scale or performance eventually demonstrates that another representation is necessary, the format may be changed.
 
-* Species definitions
-* Resources
-* Technologies
-* Factions
-* Ships
-* Items
-* Planet templates
-* Procedural-generation parameters
-* Configuration
-* Balance values
+### Simulation
 
-If performance or data scale eventually makes JSON unsuitable, another format or database may be introduced.
+**Custom discrete tick-based simulation**
 
-Do not prematurely optimize this.
-
----
-
-# 7. SIMULATION ARCHITECTURE
-
-## Custom deterministic simulation
-
-The simulation should be designed around deterministic, discrete simulation steps ("ticks") rather than tying the entire simulation directly to rendering frames.
-
-Conceptually:
-
-Simulation Tick
-→ Update economy
-→ Update production
-→ Update populations
-→ Update ships
-→ Update logistics
-→ Update politics
-→ Update exploration
-→ Process events
-→ Advance simulation time
-
-The exact tick system will be designed during architecture development.
-
-Determinism should be maintained wherever practical because it can make:
-
-* Debugging easier
-* Reproducibility easier
-* Automated testing easier
-* Procedural generation easier to reproduce
-* Simulation bugs easier to investigate
-
-Determinism is a design goal, not an excuse to make the architecture unnecessarily complicated.
-
----
-
-# 8. SIMULATION / PRESENTATION SEPARATION
-
-This is a major architectural requirement.
-
-The underlying simulation must be separated from rendering and UI wherever practical.
-
-Conceptually:
-
-SIMULATION
-↓
-Game State
-↓
-Simulation Systems
-↓
-Entities / Populations / Economies / Ships
-↓
-UI + Rendering
-
-The simulation should not depend unnecessarily on what is currently being rendered on screen.
-
-This is important because the eventual game may contain thousands of star systems.
-
-The simulation must be capable of existing independently from the visual representation of the world.
-
----
-
-# 9. SCALABILITY PRINCIPLE
-
-The long-term galaxy may contain thousands of systems.
-
-Therefore, simulation detail may eventually need to be adaptive.
-
-Potential future model:
-
-### HIGH DETAIL
-
-* Player's immediate area
-* Nearby ships
-* Active stations
-* Active combat
-* Player-relevant economies
-
-### LOWER DETAIL
-
-* Distant systems
-* Distant populations
-* Distant economic activity
-* Distant political activity
-
-The exact implementation is NOT currently locked.
-
-Do not implement premature optimization before profiling demonstrates a need.
-
-However, the architecture should avoid making full-detail simulation of the entire galaxy mandatory.
-
----
-
-# 10. RENDERING
+### Rendering
 
 **2D**
 
-The game is fundamentally a 2D game.
+### Cost
 
-The intended presentation is a sophisticated 2D space-simulation interface rather than simple pixel-art gameplay.
+**€0**
 
-Possible levels of presentation:
+The game should be capable of running locally without requiring:
 
-Galaxy View
-→ Star System View
-→ Planet / Moon View
-→ Station / Colony View
-→ Ship / Local Activity View
+* AI APIs
+* cloud servers
+* online databases
+* paid services
+* external game servers
 
-The exact visual style is not yet locked.
-
----
-
-# 11. AI DEVELOPMENT TEAM
-
-AI assistants are development tools and members of a virtual development team.
-
-They do not independently control the project.
-
-The human developer is the project owner and makes final decisions.
-
-AI assistants should collaborate through:
-
-* Shared project documentation
-* Code
-* Technical specifications
-* Reviews
-* Explicit decisions
-* Test results
-
-No AI assistant should assume that its own previous recommendation is automatically correct.
+AI services are development tools, not game-runtime dependencies.
 
 ---
 
-# 12. AI #1 — CHATGPT
+# 7. Simulation Architecture
 
-## Role: Lead Architect / Coordinator
+The simulation is the core of the project.
 
-Primary responsibilities:
+Simulation logic should be designed independently from presentation wherever practical.
 
-* Overall software architecture
-* Technical planning
-* Major technical decisions
-* Connecting systems together
-* Breaking large problems into manageable tasks
-* Reviewing major implementations
-* Maintaining consistency between systems
-* Identifying unnecessary complexity
-* Preventing architectural drift
-* Maintaining the long-term technical vision
-* Coordinating the other AI assistants
-* Performing final integration review
+The simulation should contain the authoritative state of the game world.
 
-ChatGPT should prioritize:
+Examples include:
 
-1. Project health
-2. Architectural correctness
-3. Maintainability
-4. Scalability
-5. Simplicity where possible
-6. Development practicality
-7. Immediate convenience
+* ships
+* stations
+* planets
+* markets
+* resources
+* populations
+* factions
+* production
+* logistics
+* economic state
 
-ChatGPT should NOT automatically assume that more complexity is better.
+The simulation should not fundamentally depend on whether something is currently visible on screen.
 
-ChatGPT should actively challenge the human's ideas when necessary.
+Simulation systems should operate on simulation state rather than relying on Godot's SceneTree as the authoritative representation of the universe.
 
 ---
 
-# 13. AI #2 — GEMINI
+# 8. Simulation / Presentation Separation
 
-## Role: Primary Builder / Implementation Specialist
+The project should maintain a clear distinction between:
 
-Primary responsibilities:
+### Simulation
+
+Responsible for:
+
+* world state
+* economic state
+* ship state
+* markets
+* production
+* movement logic
+* AI decisions
+* resources
+* populations
+* factions
+* simulation time
+
+### Presentation
+
+Responsible for:
+
+* sprites
+* animations
+* visual effects
+* camera
+* UI
+* selection indicators
+* visual representations of ships/stations/etc.
+
+Godot Nodes may be used extensively for presentation.
+
+However:
+
+**Simulation entities should not fundamentally depend on Godot SceneTree objects such as Node2D instances for their existence or simulation logic.**
+
+The exact data representation — arrays, dictionaries, custom data classes, Resources, RefCounted objects, or another suitable structure — is an implementation decision to be validated when the simulation is built.
+
+The architectural rule is more important than the specific container choice:
+
+**Simulation state must remain separable from presentation state.**
+
+---
+
+# 9. Scalability Principle
+
+The project is intended to support increasing scale, but **no specific final galaxy size is required**.
+
+Possible scales might eventually include:
+
+* 1 system
+* 10 systems
+* 50 systems
+* 100 systems
+* 500 systems
+* 1,000 systems
+* potentially more if the architecture and gameplay justify it
+
+These numbers are examples, not commitments.
+
+**10,000 star systems is not a project requirement.**
+
+A smaller universe is completely acceptable if it produces a better game, better simulation depth, better performance, or better development experience.
+
+Scale should therefore be treated as an **engineering capability and design option**, not as a feature checklist.
+
+The project should benchmark progressively larger simulations where useful.
+
+Possible benchmark stages may include:
+
+**1 → 10 → 100 → 1,000 → larger if justified**
+
+The purpose of benchmarking is to understand the practical limits of the architecture, not to force the game to reach an arbitrary entity count.
+
+The final game should use a scale appropriate to its gameplay and technical quality.
+
+---
+
+# 10. Rendering
+
+The project is a sophisticated 2D space simulation.
+
+The visual goal is not minimalist or deliberately primitive presentation.
+
+The game should eventually support:
+
+* detailed 2D space environments
+* readable ships
+* stations
+* planets
+* effects
+* interfaces
+* strategic information
+* strong visual feedback
+
+However, visual content should not be developed ahead of the underlying systems.
+
+---
+
+# 11. Adaptive Simulation Detail
+
+The long-term project may use different simulation detail levels.
+
+For example:
+
+### High detail
+
+Used where detailed simulation is useful or necessary.
+
+Potentially:
+
+* individual ships
+* individual logistics operations
+* detailed movement
+* local interactions
+
+### Lower detail
+
+Used for distant or otherwise unimportant parts of the universe.
+
+Potentially:
+
+* aggregated production
+* statistical populations
+* abstracted logistics
+* simplified economic calculations
+
+This system is **not currently implemented or fully designed**.
+
+It is recognized as a major future architectural and simulation-design problem.
+
+Any early architecture should avoid making eventual transition between abstract and detailed simulation impossible.
+
+Particular future concerns include:
+
+* conservation of resources
+* spawning/despawning individual entities
+* preserving economic state
+* maintaining consistent histories
+* converting aggregate state into detailed state
+* converting detailed state back into aggregate state
+
+No complete solution should be designed prematurely.
+
+---
+
+# 12. Determinism and Reproducibility
+
+The simulation should use reproducible logic wherever practical.
+
+The intended goal is:
+
+**Given the same initial state, seed, inputs, simulation rules, and intended execution environment/build, the simulation should produce reproducible results.**
+
+This is primarily intended to support:
+
+* debugging
+* testing
+* procedural generation
+* reproducible bugs
+* balancing
+* simulation analysis
+* reliable development
+
+This does **not** currently require:
+
+* cross-platform bit-perfect determinism
+* custom fixed-point arithmetic
+* multiplayer lockstep networking
+* mathematical guarantees across unrelated hardware/software environments
+
+The simulation should avoid relying on Godot's physics engine for authoritative economic or strategic simulation logic.
+
+If stronger determinism becomes a genuine requirement later, it should be treated as a separate architectural decision.
+
+Randomness should preferably be explicitly seeded and controlled where reproducibility matters.
+
+---
+
+# 13. Simulation Tick Architecture
+
+Simulation time and rendering time must remain conceptually separate.
+
+The simulation should use a defined discrete tick system.
+
+Rendering may operate at a different frequency from simulation updates.
+
+Conceptually:
+
+**Render frames ≠ Simulation ticks**
+
+Game-speed settings should affect the progression of simulation time rather than fundamentally changing the architecture of the simulation.
+
+The exact tick frequency and accumulator implementation are not yet locked.
+
+These should be selected based on actual gameplay requirements and benchmarked during implementation.
+
+---
+
+# 14. Save / Load Architecture
+
+Save/load is recognized as a future first-class system.
+
+It does not need to be fully designed before the first prototype.
+
+However, the architecture must avoid making save/load dependent on serializing the Godot SceneTree as the authoritative game state.
+
+The authoritative simulation state should eventually be serializable independently from presentation objects.
+
+Save formats will eventually require:
+
+* versioning
+* migration considerations
+* compatibility decisions
+* validation
+* corruption/error handling
+
+These are deferred until the simulation has enough state to justify designing them.
+
+---
+
+# 15. Data Architecture
+
+Early development should favor data-driven design.
+
+Definitions for things such as:
+
+* resources
+* ships
+* stations
+* production recipes
+* technologies
+* factions
+* planets
+* species
+* economic parameters
+
+should avoid unnecessary hardcoding where practical.
+
+JSON is the initial data format.
+
+The project should not introduce databases or complex data infrastructure without demonstrated need.
+
+---
+
+# 16. AI Development Team
+
+The project uses four primary roles.
+
+### ChatGPT
+
+**Lead Architect / Coordinator**
+
+Responsible for:
+
+* overall architecture
+* system design
+* technical planning
+* connecting systems
+* breaking work into tasks
+* reviewing major implementations
+* maintaining architectural consistency
+* long-term technical vision
+* coordinating AI roles
+* preventing architectural drift
+* final integration review
+
+Priority:
+
+**Project health > architecture correctness > maintainability > scalability > simplicity > practicality > immediate convenience**
+
+---
+
+### Gemini
+
+**Primary Builder / Implementation Specialist**
+
+Responsible for:
 
 * GDScript implementation
-* Gameplay systems
-* Simulation systems
-* Procedural generation
-* Simulation algorithms
-* Data generation
-* Large-scale code generation
-* Technical prototyping
-* Game-system implementation
-* Large design/document drafts
-* Procedural content generation
+* gameplay systems
+* simulation systems
+* procedural generation
+* algorithms
+* data generation
+* large implementation tasks
+* prototypes
+* development tooling
+* balance/data experiments
 
-Gemini should prioritize:
+Gemini must not silently redesign architecture.
 
-1. Correct implementation
-2. Compatibility with the established architecture
-3. Clear code
-4. Testability
-5. Performance
-6. Practical implementation
-
-Gemini must NOT silently redesign major architecture.
-
-If an implementation requires a significant architectural change, Gemini should explicitly state:
-
-* What needs to change
-* Why it needs to change
-* What alternatives were considered
-* What consequences the change has
-
-Major architectural changes should be reviewed by ChatGPT before being adopted.
+Significant architectural changes should be explicitly identified and reviewed.
 
 ---
 
-# 14. AI #3 — CLAUDE
+### Claude
 
-## Role: Independent Reviewer / Critic
+**Independent Reviewer / Critic**
 
-Primary responsibilities:
+Responsible for:
 
-* Code review
-* Bug hunting
-* Finding edge cases
-* Identifying logical errors
-* Questioning architectural decisions
-* Finding unintended interactions
-* Reviewing simulation logic
-* Reviewing performance risks
-* Suggesting simplifications
-* Testing assumptions
-* Identifying weaknesses in implementations
-
-Claude should approach the project independently rather than automatically agreeing with another AI.
-
-The purpose is to provide a genuine second opinion.
+* code review
+* bug hunting
+* edge cases
+* logical errors
+* architecture criticism
+* simulation review
+* performance concerns
+* unintended interactions
+* simplification opportunities
+* assumption testing
 
 Claude should distinguish between:
 
-* Confirmed bug
-* Likely problem
-* Possible problem
-* Architectural concern
-* Performance concern
-* Personal preference / alternative design
+* confirmed bug
+* likely problem
+* possible concern
+* architectural concern
+* performance concern
+* personal preference
 
-Claude should NOT rewrite major architecture merely because it prefers a different approach.
-
-If Claude recommends a major architectural change, the reasoning must be explicit.
+Claude should not redesign architecture merely because it prefers another approach.
 
 ---
 
-# 15. AI COLLABORATION MODEL
+### Human
 
-The AI assistants do NOT need to be used in a rigid loop for every task.
+**Project Owner / Final Authority / Playtester**
 
-The human should act as the communication bridge when necessary, but unnecessary AI-to-AI message passing should be avoided.
+Responsible for:
 
-General workflow:
+* creative direction
+* deciding what game the project should become
+* approving major decisions
+* testing the actual game
+* reporting gameplay problems
+* deciding genuine unresolved disagreements
+* maintaining the development environment
+* communicating relevant information between AI assistants
 
-## LARGE FEATURE
-
-1. Human proposes goal or requirement.
-2. ChatGPT analyzes the goal.
-3. ChatGPT designs the architecture and breaks the work into tasks.
-4. Gemini implements the appropriate task.
-5. Human provides Gemini's implementation to Claude when independent review is useful.
-6. Claude reviews the implementation.
-7. Human provides relevant review information back to ChatGPT.
-8. ChatGPT determines which criticisms are valid and what changes are actually necessary.
-9. Gemini implements required corrections when appropriate.
-10. Human tests the result in the actual game.
-11. Problems discovered during testing are reported back to ChatGPT.
-12. The implementation is corrected.
-13. Working milestone is committed to Git.
-14. The next feature begins.
-
-## SMALL FEATURE
-
-The full Gemini → Claude → ChatGPT loop is NOT required.
-
-For small changes:
-
-ChatGPT
-→ Gemini
-→ Human tests
-→ Done
-
-For trivial fixes:
-
-ChatGPT
-→ Human or Gemini
-→ Done
-
-The amount of review should match the importance and risk of the change.
+The human does not need to personally design every technical detail.
 
 ---
 
-# 16. HUMAN TESTING
+# 17. Instructions Specifically for the Human Project Owner
 
-The human developer is the primary real-world playtester.
+The human should **not** feel responsible for personally solving every technical problem.
 
-AI assistants can inspect code and reason about behavior, but they cannot replace actual testing of the game.
+The human's most important responsibilities are:
 
-The human should report:
+1. Clearly communicate what kind of game they want.
+2. Test actual implementations.
+3. Report what feels wrong, confusing, boring, or broken.
+4. Approve or reject major architectural decisions.
+5. Keep the repository and development environment organized.
+6. Bring relevant AI reviews and disagreements to the Lead Architect.
+7. Avoid pressuring the AI team into implementing features before their foundations are ready.
 
-* What happened
-* What was expected
-* What felt wrong
-* What was confusing
-* What was fun
-* What was boring
-* Performance problems
-* Visual problems
-* Unexpected behavior
-* Bugs
+The human should feel comfortable saying:
 
-The AI team should treat this feedback as valuable development data.
+* "I don't understand this technical choice."
+* "Explain this more simply."
+* "Why are we doing this?"
+* "Do we actually need this?"
+* "Can we postpone this?"
+* "I prefer the smaller version."
+* "This isn't fun even though it is technically correct."
+* "I don't care about supporting that scale."
+* "No."
 
-However, subjective feedback should not automatically override technical constraints.
+The human is **not required to accept an AI recommendation merely because multiple AIs agree**.
 
-The AI team should distinguish between:
+AI agreement is evidence, not authority.
 
-**"This feels bad to play."**
+When technical disagreements occur, the human should bring the relevant arguments to ChatGPT for architectural analysis.
 
-and:
+When genuine creative decisions remain, the human has final authority.
 
-**"This architecture is technically problematic."**
+The human should prioritize **building a good game over achieving impressive technical numbers**.
 
-Both matter, but they are different types of information.
-
----
-
-# 17. AI AUTHORITY RULES
-
-No AI assistant should silently make major architectural changes.
-
-Changes affecting the following require explicit review:
-
-* Core simulation architecture
-* Data architecture
-* Save system
-* Entity architecture
-* Tick system
-* Performance model
-* Major dependencies
-* Engine choice
-* Programming language
-* Rendering architecture
-* Networking architecture
-* Core project structure
-
-Small implementation decisions can be made by the implementation AI when they remain within the established architecture.
+A universe with 100 well-simulated systems is preferable to a universe with 10,000 poorly designed or unnecessarily abstract systems if the smaller game is more coherent and enjoyable.
 
 ---
 
-# 18. DISAGREEMENT PROTOCOL
+# 18. AI Collaboration Model
 
-AI disagreement is expected and useful.
+Not every task requires the full AI team.
 
-If two AI assistants disagree:
+### Large feature
+
+1. Human proposes goal.
+2. ChatGPT analyzes architecture.
+3. ChatGPT breaks the feature into implementation tasks.
+4. Gemini implements.
+5. Human provides implementation to Claude when review is useful.
+6. Claude reviews.
+7. Human brings relevant review back to ChatGPT.
+8. ChatGPT determines which criticisms are valid.
+9. Gemini corrects implementation if required.
+10. Human tests the game.
+11. Problems return to ChatGPT.
+12. Fixes are implemented.
+13. Git commit is made.
+14. Next feature begins.
+
+### Small feature
+
+**ChatGPT → Gemini → Human testing → done**
+
+### Trivial fix
+
+**ChatGPT → Human or Gemini → done**
+
+The human is the communication bridge when necessary.
+
+Unnecessary AI-to-AI communication should be avoided.
+
+---
+
+# 19. AI Disagreement Protocol
+
+When AI assistants disagree:
 
 1. Identify the exact disagreement.
-2. Determine whether it is factual, architectural, or subjective.
-3. Examine the reasoning behind each position.
-4. Prefer measurable evidence when possible.
-5. Prototype competing approaches when necessary.
-6. ChatGPT provides the architectural recommendation.
-7. The human makes the final decision when a genuine project-level choice remains.
+2. Determine whether it is:
 
-Do NOT resolve disagreements by simply choosing the AI that sounds more confident.
+   * factual
+   * architectural
+   * performance-related
+   * implementation-related
+   * subjective
+3. Inspect each side's reasoning.
+4. Prefer measurable evidence where possible.
+5. Prototype or benchmark when uncertainty can be cheaply tested.
+6. ChatGPT provides an architectural recommendation.
+7. The human makes the final decision when a genuine design choice remains.
+
+Never choose an approach merely because an AI sounds more confident.
 
 ---
 
-# 19. TECHNICAL DECISION STANDARD
+# 20. Technical Decision Standard
 
-Before introducing a new technology, dependency, architecture, or major system, ask:
+Before introducing a major technical system, ask:
 
-1. What problem does this solve?
-2. Do we actually have that problem yet?
+1. What problem does it solve?
+2. Do we actually have that problem?
 3. Is there a simpler solution?
-4. Does it create additional maintenance?
-5. Does it restrict future development?
+4. What maintenance cost does it introduce?
+5. Does it restrict future options?
 6. Does it help the current prototype?
 7. Does it help the eventual game?
-8. Can we postpone the decision?
+8. Can the decision safely be postponed?
+9. Can the concern be tested instead of debated?
 
-If the answer to the last question is yes, postponing the decision is often preferable.
+If a decision can safely be postponed, it should often be postponed.
 
 ---
 
-# 20. DEVELOPMENT SCALE
+# 21. Development Scale & Benchmarking
 
-The project should scale gradually.
+Development should progress from small validated systems toward larger ones.
 
-Example:
+Potential stages:
 
-1 system
-↓
-10 systems
-↓
-100 systems
-↓
-1,000 systems
-↓
-10,000 systems
+**Prototype → small simulation → larger simulation → stress testing**
 
-At each major scale, measure:
+Benchmarks may measure:
 
-* CPU usage
-* Memory usage
-* Simulation time
-* Save/load time
-* Generation time
+* simulation tick time
+* entity count
+* memory usage
+* save/load time
+* procedural generation time
+* rendering performance
 * UI performance
-* Entity counts
-* Tick performance
+* CPU usage
 
-The goal is NOT to reach 10,000 systems at any cost.
+The project should only increase scale when doing so provides useful information or gameplay value.
 
-The goal is to determine how large the simulation can realistically become while maintaining a good game.
+There is **no obligation to reach a predetermined galaxy size**.
 
-The eventual scale may be smaller or larger than the initial vision.
-
-Technical evidence should determine that.
+If 100 systems provide the desired gameplay experience, there is no technical reason to create 10,000 merely because the architecture could theoretically support them.
 
 ---
 
-# 21. AI COST PHILOSOPHY
+# 22. AI Cost Philosophy
 
-Target development cost:
-
-**€0**
-
-The project should not depend on paid AI APIs.
-
-AI assistants may be used through their available free interfaces or tiers.
-
-Free usage limits are expected and should be managed rather than bypassed.
-
-The game itself must NOT depend on external AI services.
-
-The finished game should be capable of running locally without requiring:
-
-* AI APIs
-* Cloud servers
-* Online databases
-* Paid services
-* External game servers
-
-AI is part of the **development workflow**, not part of the **game's core runtime**.
-
----
-
-# 22. CURRENT NON-GOALS
-
-The following are deliberately NOT being solved yet:
-
-* 10,000-system galaxy
-* Thousands of species
-* Full civilization simulation
-* Full diplomacy system
-* Advanced politics
-* Complete research tree
-* Complex combat
-* Multiplayer
-* Online services
-* Cloud infrastructure
-* Final graphics
-* Final UI
-* Publishing
-* Monetization
-
-These are potential future systems.
-
-The immediate goal is to create a tiny but functioning simulation.
-
----
-
-# 23. DEVELOPMENT PHILOSOPHY
+The project currently targets **€0 development cost**.
 
 Prefer:
 
-* Simple systems that work
-* Modular architecture
-* Data-driven design
-* Procedural generation
-* Deterministic simulation where practical
-* Testable systems
-* Clear interfaces between systems
-* Incremental development
-* Profiling before optimization
-* Reusable systems
-* Explicit technical decisions
-* Small working milestones
+* free software
+* free development tools
+* free GitHub resources
+* local computation
+* open formats
+* existing capabilities
+
+Avoid introducing paid infrastructure unless the project's goals change.
+
+The project currently does not depend on AI APIs at runtime.
+
+---
+
+# 23. Current Non-Goals
+
+The following are explicitly not current priorities:
+
+* building thousands of star systems immediately
+* designing the entire galaxy before the prototype works
+* implementing every planned gameplay system
+* premature optimization
+* building the complete LOD/abstract simulation system
+* designing the complete save system
+* multiplayer
+* online infrastructure
+* cloud simulation
+* monetization
+* publishing
+* massive content creation before systems are validated
+* switching technology stacks because of hypothetical future problems
+
+The project should not become a technology demonstration at the expense of becoming a good game.
+
+---
+
+# 24. Development Philosophy
+
+Prefer:
+
+**small → test → understand → improve → expand**
+
+rather than:
+
+**design everything → build everything → discover architectural problems later**
 
 Avoid:
 
-* Premature optimization
-* Giant monolithic scripts
-* Hardcoding thousands of objects
-* Building content before systems work
-* Adding dependencies without a reason
-* Changing architecture casually
-* Overengineering simple systems
-* Designing the entire game before creating a playable prototype
-* Implementing features solely because they sound impressive
-* Building large-scale content before proving the underlying systems
+* monolithic scripts
+* unnecessary dependencies
+* premature optimization
+* excessive abstraction
+* hardcoded large-scale content
+* architecture changes without justification
+* feature development solely because it looks impressive
+* solving hypothetical problems before they exist
+
+Use prototypes and benchmarks when they can answer technical questions cheaply.
 
 ---
 
-# 24. CURRENT TECHNICAL DECISIONS
+# 25. Current Technical Decisions
 
-These decisions are considered **LOCKED** unless there is a documented reason to reconsider them.
+The currently locked decisions are:
 
-Engine:
-**Godot 4.7.2 stable**
+* Godot 4.7.2
+* GDScript as primary language
+* Python as development tooling language
+* Git
+* GitHub Free private repository
+* JSON as initial data format
+* custom discrete simulation ticks
+* 2D rendering
+* simulation/presentation separation
+* reproducible seeded simulation where practical
+* no requirement for cross-platform bit-perfect determinism
+* simulation state independent from Godot SceneTree presentation
+* gradual scalability through benchmarking
+* no predetermined final galaxy size
+* €0 development target
+* local-first game architecture
+* AI services are development tools, not runtime dependencies
 
-Primary language:
-**GDScript**
-
-Secondary language:
-**Python**
-
-Version control:
-**Git**
-
-Remote repository:
-**GitHub Free private repository**
-
-Initial code editor:
-**Godot Editor**
-
-Initial data format:
-**JSON**
-
-Simulation:
-**Custom deterministic tick-based simulation**
-
-Presentation:
-**2D**
-
-Development cost target:
-**€0**
-
-Current publication status:
-**Private personal project; no current plan to publish or monetize**
-
-AI architecture:
-
-**ChatGPT**
-→ Lead Architect / Coordinator
-
-**Gemini**
-→ Primary Builder / Implementation Specialist
-
-**Claude**
-→ Independent Reviewer / Critic
-
-Human:
-→ Project Owner / Final Authority / Playtester
+Any change to these decisions should be explicit.
 
 ---
 
-# 25. IMPORTANT INSTRUCTION FOR ALL AI ASSISTANTS
+# 26. Architectural Documentation
 
-When contributing to this project:
+Major architectural decisions should eventually be recorded in version-controlled project documentation.
 
-1. Read this document first.
-2. Respect the locked technical decisions.
-3. Do not redesign the project unnecessarily.
-4. Do not assume the entire game must be built immediately.
-5. Prefer small, working, testable increments.
-6. Explain significant architectural decisions.
-7. Keep systems modular.
-8. Consider eventual large-scale simulation without prematurely optimizing for it.
-9. If another AI's code is wrong, identify the specific problem and explain it.
-10. Do not blindly agree with another AI.
-11. Preserve compatibility with existing project architecture.
-12. When uncertain, identify the uncertainty explicitly.
-13. Do not make major architectural changes silently.
-14. Prefer evidence and testing over confidence.
-15. Challenge ideas that are likely to harm the project.
-16. Never prioritize the human's immediate satisfaction over the long-term quality of the project.
-17. If the correct answer is "No", say "No" and explain why.
-18. If a requested feature should be postponed, say so.
-19. If the project's scope is becoming unreasonable, say so.
-20. If a simpler solution is better, recommend the simpler solution.
-21. Remember that the long-term vision is ambitious, but the current implementation must remain manageable.
-22. Treat this document as a living technical contract. Proposed changes should be explicit and justified.
+Potential structure:
+
+```text
+docs/
+├── PROJECT_FOUNDATION.md
+├── ARCHITECTURE.md
+├── SIMULATION.md
+├── DATA_MODEL.md
+└── decisions/
+    ├── ADR-001-...
+    ├── ADR-002-...
+    └── ...
+```
+
+The exact structure may evolve.
+
+The purpose is to create a shared technical ground truth that can be read by:
+
+* ChatGPT
+* Gemini
+* Claude
+* future development tools
+* the human project owner
+
+Important architectural decisions should not exist only inside individual AI conversations.
+
+Git history should preserve how important decisions changed over time.
 
 ---
 
-# 26. FINAL PROJECT PRINCIPLE
+# 27. Important Instruction for All AI Assistants
 
-The project is intentionally ambitious.
+All AI assistants must remember:
 
-Ambition is encouraged.
+**You are helping build a game, not merely generating code.**
 
-Recklessness is not.
+A technically impressive feature that damages architecture, maintainability, development speed, or gameplay is not automatically a good feature.
 
-The goal is to see how far a small development team consisting of one human and several AI assistants can take a complex space simulation while maintaining a clean, understandable, and extensible codebase.
+Do not blindly agree with the human.
 
-The project should grow because the foundation supports growth — **not because we rushed to build everything at once.**
+Do not blindly disagree with the human either.
+
+Do not assume that maximum scale is automatically better.
+
+Do not assume that more systems, more entities, more complexity, or more simulation detail automatically produce a better game.
+
+If a proposed feature is premature, say so.
+
+If a proposed architecture is flawed, say so.
+
+If the simplest solution is sufficient, recommend the simplest solution.
+
+If uncertainty can be resolved through a small prototype or benchmark, recommend testing it.
+
+---
+
+# 28. Final Project Principle
+
+The project should grow because its foundation supports growth.
+
+The goal is not:
+
+**"Make the biggest space simulation possible."**
+
+The goal is:
+
+**"Make the best space simulation we can realistically build, with an architecture that allows it to grow as far as the game actually needs."**
+
+A small, deep, coherent universe is a successful outcome.
+
+A large universe is successful only if the additional scale provides meaningful gameplay value.
+
+The architecture should therefore preserve ambition without creating obligations.
+
+**Ambition is encouraged. Recklessness is not.**
+
+**Build the foundation first.**
+
+**Validate before scaling.**
+
+**Make the game good before making it enormous.**
